@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trace-个人引擎</title>
+    <link rel="shortcut icon" href="./images/logo.png">
+    <link rel="stylesheet" href="./css/index.css">
+    <script defer src="./js/all.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="title">Find Everying Near You</div>
+        <div class="search-box">
+            <input class="search-txt" type="text" placeholder="what are you looking for?" v-model="key" @keyup="keyenter">
+            <span class="search-btn" @click="tonext">
+                <i class="fas fa-search"></i>
+            </span>
+        </div>
+    </div>
+
+
+    <script src="./js/vue.js"></script>
+    <script>
+        let app = new Vue({
+           el: "#app",
+           data() {
+               return {
+                  key:"",
+               }
+           },
+           methods: {
+              keyenter(e){
+                if(e.keyCode==13 && this.key!=""){
+                    window.location.href="./search/index.html?id="+this.key
+                }
+              },
+              tonext(){
+                if(this.key!=""){
+                    window.location.href="./search/index.html?id="+this.key
+                }
+               
+              }
+           },
+        })
+    </script>
+</body>
+</html>

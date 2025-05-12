@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trace-个人引擎</title>
+    <link rel="shortcut icon" href="./images/logo.png">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./element/element.css">
+
+    <style>
+        .highlight {
+            background-color: red;
+            font-weight: bold;
+        }
+    </style>
+    
+</head>
+<body>
+    <div id="app">
+        <div class="header">
+            <img src="./images/title.png" class="logo">
+            <input type="text" v-model="text" @keyup="keyenter">
+        </div>
+
+        <div class="once" v-for="p in list">
+            <div class="href">{{p.href}}</div>
+            <a :href="p.href" target="_blank" v-html="brightenKeyword(p.title,text)">{{}}</a>
+            <span v-html="brightenKeyword(p.text,text)">{{}}</span>
+        </div>
+        <div class="foot" v-if="flag">
+            <el-pagination :current-page=begin background=true backgroundlayout="prev, pager, next" :total="50" @current-change="down">
+            </el-pagination>
+        </div>
+        
+    </div>
+
+
+    <script src="./js/axios.min.js"></script>
+    <script src="./js/vue.js"></script>
+    <script src="./element/element.js"></script>
+    <script>
+        let app = new Vue({
+           el: "#app",
+           data() {
+               return {
+                  begin: 1,
+                  text: "",
+                  key: "",
+                  all: [],
+                  list: [],
+                  flag: false
+               }
+           },
+           mounted() {
+                 let str = location.search
+                 let match = str.match(/=(.*)/);
+                 let result = match ? match[1] : "error";
+                 this.key=decodeURIComponent(result)
+                 this.text = this.key
+                 let params={
+                    key:this.key
+                 }
+                 axios.post("/spider", params).then((res)=>{
+                    this.all = res.data
+                    this.list = this.all[0]
+                    this.flag = true
+                     console.log(this.list)
+                 })
+           },
+           methods: {
+             brightenKeyword(val, keyword) {
+                const Reg = new RegExp(keyword, 'i');
+                let res = '';
+                if(val) {
+                    res = val.replace(Reg, `<span style="color: red;display: inline;font-weight: bold;">${keyword}</span>`);
+                    return res;
+                }
+             },
+             down(index){
+                this.list = this.all[index-1]
+                this.begin = index
+                window.scrollTo(0,0)
+             },
+             keyenter(e){
+                if(e.keyCode==13 && this.text!=""){
+                    let params={
+                       key:this.text
+                    }
+                    this.list = []
+                    this.begin = 1
+                    axios.post("/spider", params).then((res)=>{
+                       this.all = res.data
+                       this.list = this.all[0]
+                       this.flag = true
+                    })
+                }
+             },
+           },
+
+        })
+    </script>
+</body>
+</html>

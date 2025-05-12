@@ -1,0 +1,90 @@
+body,html {
+    margin: 0;
+    padding: 0;
+}
+/* 1860 965 */
+#app {
+    width: 44vw;
+    height: 100vh;
+    margin-left: 3vw;
+}
+
+.header {
+    width: 100%;
+    height: 4.56vh;
+    margin-top: 3.6vh;
+    display: flex;
+    justify-content: space-around;
+}
+
+.header input {
+    box-sizing: border-box;
+    width: 34vw;
+    height: 100%;
+    border-radius: 1vw;
+    text-indent: 2%;
+    font-size: 1.76vh;
+}
+
+.header img {
+    height: 100%;
+}
+
+.once {
+    box-sizing: border-box;
+    width: 34vw;
+    height: 12.83vh;
+    padding: 1.66vh 0;
+    margin: 1.66vh auto;
+}
+
+.once .href {
+    color: #5f6368;
+    font-family: Roboto,arial,sans-serif!important;
+    font-size: 1.45vh;
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.once a {
+    display: block;
+    width: 95%;
+    font-size: 2.07vh;
+    color: #660099;
+    font-family: Roboto,arial,sans-serif!important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 0.62vh;
+    text-decoration: none;
+}
+
+.once a:hover {
+    text-decoration: underline;
+}
+
+.once span {
+    display: block;
+    width: 100%;
+    font-family: Roboto,arial,sans-serif!important;
+    font-size: 1.45vh;
+    color: #4d5156;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    margin-top: 0.62vh;
+}
+
+.foot {
+    width: 90%;
+    margin-top: 2vh;
+    padding-bottom: 7.15vh;
+}
+
+
+
+
+
